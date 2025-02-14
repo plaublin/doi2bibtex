@@ -22,42 +22,6 @@ The motivation for **doi2bibtex** was rather personal and came from two facts: 1
 At some point, I got tired of the ever-growing mess of shell scripts and bash commands that I used to achieve this, and decided to re-write as a single package that would be easier to maintain and extend.
 
 
-## Why a fork?
-
-The key is FirstAuthorLastName + Year only, which means that if an author has 2 papers in the same year, they will have the same key.
-For example:
-```bash
-$ d2b --plain 10.1145/3625275.3625400
-@inproceedings{Fiedler_2023,
-  author        = {{Fiedler}, Ben and {Meier}, Roman and {Schult}, Jasmin and {Schwyn}, Daniel and {Roscoe}, Timothy},
-  title         = {Specifying the de-facto OS of a production SoC},
-  [...]
-}
-$ d2b --plain 10.1145/3593856.3595903
-@inproceedings{Fiedler_2023,
-  author        = {{Fiedler}, Ben and {Schwyn}, Daniel and {Gierczak-Galle}, Constantin and {Cock}, David and {Roscoe}, Timothy},
-  title         = {Putting out the hardware dumpster fire},
-  year          = {2023}
-  [...]
-}
-```
-
-To avoid this situation, the code is modified so that the first word of the title is appended to the key:
-```bash
-$ d2b --plain 10.1145/3625275.3625400
-@inproceedings{Fiedler_2023_Specifying,
-  author        = {{Fiedler}, Ben and {Meier}, Roman and {Schult}, Jasmin and {Schwyn}, Daniel and {Roscoe}, Timothy},
-  title         = {Specifying the de-facto OS of a production SoC},
-  [...]
-}
-$ d2b --plain 10.1145/3593856.3595903
-@inproceedings{Fiedler_2023_Putting,
-  author        = {{Fiedler}, Ben and {Schwyn}, Daniel and {Gierczak-Galle}, Constantin and {Cock}, David and {Roscoe}, Timothy},
-  title         = {Putting out the hardware dumpster fire},
-  year          = {2023}
-  [...]
-}
-```
 
 ## 🚀 Quickstart
 
