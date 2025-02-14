@@ -274,8 +274,11 @@ def generate_citekey(bibtex_dict: dict, delim: str = "_") -> dict:
     if von := first_author["von"]:
         lastname = "".join([_.title() for _ in von]) + lastname
 
-    # Combine the name and year to get the citekey
-    citekey = f"{lastname}{delim}{bibtex_dict['year']}"
+    # Add the first word of the title
+    title = bibtex_dict["title"].split(" ")[0]
+
+    # Combine the name, year and title to get the citekey
+    citekey = f"{lastname}{delim}{bibtex_dict['year']}{delim}{title}"
 
     # Update the citekey of the BibTeX entry
     bibtex_dict["ID"] = citekey
